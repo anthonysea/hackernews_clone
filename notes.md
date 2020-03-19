@@ -26,3 +26,30 @@ Pros
 - Swapping old object references with new object references is optimized by Javascripts -> performant
 Cons
 - Less performant than a mutable approach with small datasets
+
+### Random notes 
+- Any time you change component state, the `render()` method of your component will run again
+
+- React has **unidirectional data flow**. Components initialize the state which is used in rendering the View, state can then be changed by using the setState method which alters the state.
+
+- **Binding** - class methods don't automatically bind `this` to the class instance. If you want to access `this`/`this.state` in your class method, you have to bind your class methods to `this` in the component constructor.
+    i.e. (in the Component constructor)
+``` this.myMethod = this.myMethod.bind(this)```
+
+- Use ****higher order functions** with event handlers to pass arguments to the function that is handling the event
+
+- Use **synthetic events** in React to access event payloads  
+
+- **ES6 destructuring**:  
+```
+const user = {
+    firstname: 'Robin',
+    lastname: 'Wieruch',
+};
+const { firstname, lastname } = user;
+console.log(firstname + ' '  + lastname)
+```
+
+- **Controlled components**
+
+- Use functional stateless components when you odn't need local state or component lifecycle methods
