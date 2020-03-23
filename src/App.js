@@ -38,7 +38,6 @@ class App extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
-    this.isSearched2 = this.isSearched2.bind(this);
   }
 
   componentDidMount() {
@@ -48,10 +47,12 @@ class App extends Component {
     this.fetchSearchTopStories(searchTerm);
   }
 
+  // function to check if the results to searchTerm are already cached, if they are, return false
   needsToSearchTopStories(searchTerm) {
     return !this.state.results[searchTerm]
   }
 
+  // function that returns the results from the async API request; concatenates past results with new results
   setSearchTopStories(result) {
     const { hits, page } = result;
     const { searchKey, results } = this.state;
@@ -73,6 +74,7 @@ class App extends Component {
     });
   }
 
+  // request data from the hackernews api with the searchTerm and page specified
   fetchSearchTopStories(searchTerm, page=0) {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
@@ -80,6 +82,7 @@ class App extends Component {
       .catch(error => error);
   }
 
+  // function callback when form input is submitted
   onSearchSubmit(event) {
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
@@ -91,8 +94,7 @@ class App extends Component {
     event.preventDefault();
   }
 
-  
-    
+  // function callback that is used with the dismiss button to remove a results from the results
   onDismiss(id) {
     const { searchKey, results } = this.state
     const { hits, page } = results[searchKey];
@@ -107,12 +109,9 @@ class App extends Component {
     })
   }
 
+  // function callback onChange; used with the input box of the form to set the searchTerm to the value inputted
   onSearchChange(event) {
     this.setState({ searchTerm: event.target.value });
-  }
-
-  isSearched2(searchTerm) {
-    return item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
   }
 
   render() {
