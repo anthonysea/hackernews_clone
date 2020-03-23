@@ -52,4 +52,33 @@ console.log(firstname + ' '  + lastname)
 
 - **Controlled components**
 
-- Use functional stateless components when you odn't need local state or component lifecycle methods
+- Use functional stateless components when you don't need local state or component lifecycle methods
+
+- **ES6 spread operator** allows you to copy every value from an array or object to a new array or object, i.e.:
+``` 
+const userNames = { firstname: 'John', lastname: 'Smith' };
+const userAge = { age: 28 };
+const user = {...userNames, ...userAge };
+```
+
+
+#### Lifecycle methods
+- React mounting process has 4 lifecycle methods which are invoked in the following order:  
+`constructor(props)` -- Called when component gets initialized; set inital component state and bind class methods  
+`componentwillMount()`  
+`render()` -- Mandatory lifecycle method and returns the elements as an output of the component; should not modify component state  
+`componentDidMount()` -- Called only once when the component gets mounted; good time to do an asynchronous request to fetch data  
+
+- When state or the props change for a component the following methods are invoked:  
+`componentWillReceiveProps(nextProps)` -- Called during an update lifecycle, as input you get the next props which can be diff'd with the previous props  
+`shouldComponentUpdate()` -- Always called when the compoent updates due to state or prop changes; used for performance optimizations  
+`render()`  
+`componentDidUpdate(prevProps, prevState)` -- Invoked right after `render()` is called; usually used to perform DOM operations or to perform further asynchronous requests
+
+- Called before you destroy your component  
+`componentWillUnmount()`
+
+- `componentDidCatch(error, into)` -- used to catch errors in components
+
+
+
