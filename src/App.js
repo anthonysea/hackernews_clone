@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import './App.css';
 
 const DEFAULT_QUERY = 'redux';
@@ -177,6 +178,12 @@ const Button = ({ onClick, className='', children }) =>
     {children}
   </button>
 
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+}
+
 const Search = ({ value, onChange, onSubmit, children }) =>
     <form onSubmit={onSubmit}>
       {children} <input
@@ -210,6 +217,19 @@ const Table = ({ list, onDismiss }) =>
       </div>
     )}
   </div>
+
+Table.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      objectID: PropTypes.string.isRequired,
+      author: PropTypes.string,
+      url: PropTypes.string,
+      num_comments: PropTypes.number,
+      points: PropTypes.number,
+    })
+  ).isRequired,
+  onDismiss: PropTypes.func.isRequired,
+}
 
 // CSS Styling
 const largeColumn = {
